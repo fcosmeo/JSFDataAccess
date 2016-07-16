@@ -1,6 +1,7 @@
 package pe.edu.utp.jsfdataaccess.models;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -14,6 +15,9 @@ import java.util.List;
 @SessionScoped
 public class HRServiceFacade {
     private Connection connection;
+
+
+    private Employee currentEmployee;
 
     public HRServiceFacade() {
         try {
@@ -44,4 +48,11 @@ public class HRServiceFacade {
     }
 
 
+    public Employee getCurrentEmployee() {
+        return currentEmployee;
+    }
+
+    public void saveCurrentEmployee(Employee currentEmployee) {
+        this.currentEmployee = currentEmployee;
+    }
 }
