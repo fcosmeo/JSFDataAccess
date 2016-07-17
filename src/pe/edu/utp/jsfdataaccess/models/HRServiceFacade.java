@@ -3,9 +3,11 @@ package pe.edu.utp.jsfdataaccess.models;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import javax.xml.ws.Response;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,8 +17,6 @@ import java.util.List;
 @SessionScoped
 public class HRServiceFacade {
     private Connection connection;
-
-
     private Employee currentEmployee;
 
     public HRServiceFacade() {
@@ -28,7 +28,6 @@ public class HRServiceFacade {
             e.printStackTrace();
         }
     }
-
     private Connection getConnection() {
         return connection;
     }
@@ -47,12 +46,19 @@ public class HRServiceFacade {
         return getEmployeesEntity().getEmployees();
     }
 
-
     public Employee getCurrentEmployee() {
         return currentEmployee;
     }
 
-    public void saveCurrentEmployee(Employee currentEmployee) {
+    public void setCurrentEmployee(Employee currentEmployee) {
         this.currentEmployee = currentEmployee;
     }
+
+    public void setEditCurrentEmployee(Employee employee){ getEmployeesEntity().setEditEmployee(employee); }
+
+    public void setEditCurrentEmployee2(int id, String firstName,String lastName){
+        getEmployeesEntity().setEditEmployee2(id,firstName,lastName);
+
+    }
+
 }

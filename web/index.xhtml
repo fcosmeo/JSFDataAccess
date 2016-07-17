@@ -14,11 +14,12 @@
 </h:head>
 <div class="container">
 <f:view>
+<h:form>
    <h:outputLabel value="HR Service"/>
    <br/>
    <h:outputLabel value="Count: #{hrservicefacade.employeesCount}"/>
    <br/>
-   <h:dataTable value="#{hrservicefacade.employees}" var="employee" class="table table-striped" >
+   <h:dataTable value="#{hrservicefacade.employees}" var="employee" class="table table-striped" paginator="true" >
       <h:column>
          <f:facet name="header">Id</f:facet>
          #{employee.id}
@@ -34,9 +35,11 @@
       <h:column>
          <f:facet name="header">Actions</f:facet>
 
-         <h:commandLink value="Edit" action="editEmployee" actionListener="#{hrservicefacade.saveCurrentEmployee(employee)}"/>
+         <h:commandLink value="Edit" action="editEmployee" actionListener="#{hrservicefacade.setCurrentEmployee(employee)}"/>
+
       </h:column>
    </h:dataTable>
+</h:form>
 </f:view>
 </div>
 </html>

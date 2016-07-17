@@ -1,23 +1,49 @@
 package pe.edu.utp.jsfdataaccess.models;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by GrupoUTP on 09/07/2016.
- */
+import static java.lang.System.out;
+
 public class EmployeesEntity {
     private Connection connection;
 
     public Connection getConnection() { return connection; }
 
-
-
     public void setConnection(Connection connection) { this.connection = connection;}
+
+    public void setEditEmployee(Employee employee){
+        if(connection != null) {
+
+            try {
+                PreparedStatement pstm = null;
+                pstm = getConnection().prepareStatement("update employees set first_name= ?,last_name= ? where employee_id= ? ");
+                pstm.setString(1, employee.getFirstName());
+                pstm.setString(2, employee.getLastName());
+                pstm.setInt(3, employee.getId());
+                pstm.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void setEditEmployee2(int id, String firstName,String lastName){
+            int li_cant;
+            String sql="update employees set first_name= ?,last_name= ? where employee_id= ? ";
+
+            try {
+                PreparedStatement pstm = connection.prepareStatement(sql);
+                pstm.setString(1, firstName);
+                pstm.setString(2, lastName);
+                pstm.setInt(3, id);
+                li_cant=pstm.executeUpdate();
+                out.println("hola");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+    }
 
     public List<Employee> getEmployees(){
         String sql="SELECT *FROM employees";
