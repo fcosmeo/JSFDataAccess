@@ -153,7 +153,7 @@
       </foreign-key>
       <foreign-key id="46" parent="8" name="employees_employees_employee_id">
         <columns>manager_id</columns>
-        <ref-key>PRIMARY</ref-key>
+        <ref-key>~.countries.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
